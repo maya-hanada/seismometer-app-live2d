@@ -1,0 +1,19 @@
+.footer {
+  width: 100%;
+  background-color: rgba(245, 246, 241, 1);
+  color: rgb(99, 99, 99);
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  bottom: 0; /*下に固定*/
+}
+.links {
+  display: flex;
+  justify-content: center;
+}
+.item {
+  margin: 0 10px;
+}
+.copyright {
+  margin-top: 10px;
+}

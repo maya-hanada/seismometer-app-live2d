@@ -1,0 +1,66 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "bobchan_v2.moc3",
+		"Textures": [
+			"bobchan_v2.2048/texture_00.png"
+		],
+		"DisplayInfo": "bobchan_v2.cdi3.json",
+		"Motions": {
+			"Idle": [
+				{
+					"File": "motions/q0.motion3.json",
+					"FadeInTime": 0.0,
+					"FadeOutTime": 0.0
+				}
+			],
+			"Quake": [
+				{
+					"File": "motions/q0.motion3.json",
+					"FadeInTime": 0.0,
+					"FadeOutTime": 0.0
+				},
+				{
+					"File": "motions/q1.motion3.json",
+					"FadeInTime": 0.0,
+					"FadeOutTime": 0.0
+				},
+				{
+					"File": "motions/q2.motion3.json",
+					"FadeInTime": 0.0,
+					"FadeOutTime": 0.0
+				},
+				{
+					"File": "motions/q3.motion3.json",
+					"FadeInTime": 0.0,
+					"FadeOutTime": 0.0
+				},
+				{
+					"File": "motions/q4.motion3.json",
+					"FadeInTime": 0.0,
+					"FadeOutTime": 0.0
+				},
+				{
+					"File": "motions/q5.motion3.json",
+					"FadeInTime": 0.0,
+					"FadeOutTime": 0.0
+				}
+			]
+		}
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": []
+		},
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": [
+				"ParamEyeLOpen",
+				"ParamEyeROpen"
+			]
+		}
+	]
+}
