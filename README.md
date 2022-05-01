@@ -1,5 +1,7 @@
 # 地震計アプリ(Seismometer app)
 
+![thumb](src/assets/smb.png)
+
 テスト版のお試しはこちら → https://test-quake.hanadamaya.net/  
 Please try this app: https://test-quake.hanadamaya.net/  
 
