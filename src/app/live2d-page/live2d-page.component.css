@@ -42,8 +42,8 @@
 }
 .mat-raised-button {
   font-family: "Noto Sans JP", Roboto, "Helvetica Neue", sans-serif;
-  min-height: 40px;
-  min-width: 180px;
+  min-height: 50px;
+  min-width: 120px;
   font-size: 2vh;
   margin-right: 10px;
   margin-left: 10px;
