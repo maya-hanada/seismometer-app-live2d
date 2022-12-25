@@ -4,6 +4,7 @@ import { retry, take } from 'rxjs/operators';
 
 import { Live2dService } from './live2d.service';
 import { QuakeService } from './quake.service';
+import { LoadingService } from '../loading/loading.service';
 import { QuakeOut } from './quake-out';
 import { environment } from 'src/environments/environment';
 
@@ -40,7 +41,8 @@ export class Live2dPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private live2dService: Live2dService,
-    private quakeService: QuakeService
+    private quakeService: QuakeService,
+    private loadingService: LoadingService
   ) {}
 
   @HostListener('window:resize')
@@ -51,10 +53,10 @@ export class Live2dPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log('onInit');
     this.live2dService.loading_live2d();
-    this.getLatestData();
+    this.getOnceTodayQuakes(true);
     this.subscription = interval(1000 * 60 * environment.connectMins).subscribe(
       () => {
-        this.getLatestData();
+        this.getOnceTodayQuakes(false);
       }
     );
   }
@@ -65,17 +67,20 @@ export class Live2dPageComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  getOnceQuake(): void {
-    const alterState = (value: QuakeOut[]): void => {
-      if (!value.length) {
+  getOnceTodayQuakes(isLoading: boolean): void {
+    const alterStates = (values: QuakeOut[]) => {
+      if (!values.length) {
         this.quake = '通信エラー';
         console.log('failed: API call getQuake()');
+        if (isLoading) {
+          this.loadingService.loadingOff();
+        }
         return;
       }
 
-      if (value[0].maxScale) {
-        this.quake = `${value[0].time} ${value[0].hypocenter} 震度${value[0].maxScale}`;
-        let translatedScale = this.translateScale[value[0].maxScale];
+      if (values[0].maxScale) {
+        this.quake = `${values[0].time} ${values[0].hypocenter} 震度${values[0].maxScale}`;
+        let translatedScale = this.translateScale[values[0].maxScale];
         if (translatedScale != 0) {
           this.changeMotion(translatedScale);
         }
@@ -83,30 +88,24 @@ export class Live2dPageComponent implements OnInit, OnDestroy {
         this.quake = '';
         console.log('no value: maxScale');
       }
-    };
 
-    this.quakeService.getQuake().pipe(take(1), retry(3)).subscribe(alterState);
-  }
-
-  getOnceTodayQuakes(): void {
-    const alterStates = (values: QuakeOut[]) => {
-      if (values.length) {
-        if (values[0].time) {
-          console.log(`Today Quakes : ${values.length}`);
-          this.todayQuakes = values.filter((value) => {
-            return value.maxScale && value.hypocenter;
-          });
-        } else {
-          console.log(`Today Quakes : none`);
-          this.todayQuakes = [];
-        }
+      if (values[0].time) {
+        console.log(`Today Quakes : ${values.length}`);
+        this.todayQuakes = values.filter((value) => {
+          return value.maxScale && value.hypocenter;
+        });
       } else {
-        this.quake = '通信エラー';
+        console.log(`Today Quakes : none`);
         this.todayQuakes = [];
-        console.log('failed: API call getTodayQuakes()');
+      }
+
+      if (isLoading) {
+        this.loadingService.loadingOff();
       }
     };
-
+    if (isLoading) {
+      this.loadingService.loadingOn();
+    }
     this.quakeService
       .getTodayQuakes()
       .pipe(take(1), retry(3))
@@ -115,11 +114,10 @@ export class Live2dPageComponent implements OnInit, OnDestroy {
 
   changeMotion(no: number): void {
     console.log(`changeMotion: ${no}`);
-    this.live2dService.changeMotion_live2d(no);
-  }
-
-  getLatestData(): void {
-    this.getOnceQuake();
-    this.getOnceTodayQuakes();
+    try {
+      this.live2dService.changeMotion_live2d(no);
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

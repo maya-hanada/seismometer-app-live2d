@@ -11,9 +11,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
-  declarations: [AppComponent, Live2dPageComponent],
+  declarations: [AppComponent, Live2dPageComponent, LoadingComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -23,6 +25,7 @@ import { MatTableModule } from '@angular/material/table';
     MatButtonModule,
     MatChipsModule,
     MatTableModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
