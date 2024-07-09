@@ -1,4 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap");
+@use '@angular/material' as mat;
+$myapp-typography: mat.define-typography-config(
+  $font-family: '"Noto Sans JP", Roboto, "Helvetica Neue", sans-serif',
+);
+@include mat.all-component-typographies($myapp-typography);
 
 html {
   scroll-behavior: smooth;
