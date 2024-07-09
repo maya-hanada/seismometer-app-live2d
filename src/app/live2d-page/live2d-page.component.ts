@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-live2d-page',
   templateUrl: './live2d-page.component.html',
-  styleUrls: ['./live2d-page.component.css'],
+  styleUrls: ['./live2d-page.component.scss'],
 })
 export class Live2dPageComponent implements OnInit, OnDestroy {
   public quake: string = 'データ取得中...';
