@@ -1,6 +1,12 @@
 @use '@angular/material' as mat;
 $myapp-typography: mat.define-typography-config(
   $font-family: '"Noto Sans JP", Roboto, "Helvetica Neue", sans-serif',
+  $button: mat.define-typography-level(
+    $font-size: 2vh,
+    $line-height: 14px,
+    $font-weight: 500,
+    $letter-spacing: normal,
+  ),
 );
 @include mat.all-component-typographies($myapp-typography);
 

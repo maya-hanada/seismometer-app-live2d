@@ -40,13 +40,6 @@
   margin-right: -50%;
   transform: translate(-50%, -50%);
 }
-.mat-raised-button {
-  min-height: 50px;
-  min-width: 120px;
-  font-size: 2vh;
-  margin-right: 10px;
-  margin-left: 10px;
-}
 
 .nav-arrow-area {
   background: rgba(245, 246, 241, 1);
@@ -64,17 +57,6 @@
   align-items: center;
   justify-content: center;
 }
-.mat-icon-button {
-  display: flex;
-  justify-content: center;
-}
-.mat-icon {
-  display: flex;
-  align-items: center;
-  height: 48px;
-  width: 48px;
-  font-size: 48px;
-}
 .sokuhou_label {
   font-size: 20px;
 }
@@ -90,7 +72,29 @@
   padding: 3%;
 }
 
-.quake-table {
-  width: 100%;
-  font-family: "Noto Sans JP", Roboto, "Helvetica Neue", sans-serif;
+/* Angular Material カスタマイズ */
+:host ::ng-deep {
+  .change-button {
+    .mat-mdc-raised-button {
+      min-height: 50px;
+      min-width: 120px;
+      margin-right: 10px;
+      margin-left: 10px;
+    }
+  }
+  .icon-container {
+    .mat-mdc-icon-button {
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      .mat-icon {
+        height: 48px;
+        width: 48px;
+        line-height: 48px;
+      }
+      .material-icons {
+        font-size: 48px;
+     }
+    }
+  }
 }
