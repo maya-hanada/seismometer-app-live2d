@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "seismometer-app-live2d:build:production"
+              "buildTarget": "seismometer-app-live2d:build:production"
             },
             "development": {
-              "browserTarget": "seismometer-app-live2d:build:development"
+              "buildTarget": "seismometer-app-live2d:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "seismometer-app-live2d:build"
+            "buildTarget": "seismometer-app-live2d:build"
           }
         },
         "test": {
