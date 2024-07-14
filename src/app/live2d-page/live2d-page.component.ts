@@ -53,10 +53,10 @@ export class Live2dPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log('onInit');
     this.live2dService.loading_live2d();
-    this.getOnceTodayQuakes(true);
+    this.getOnceTodayQuakes(true, false);
     this.subscription = interval(1000 * 60 * environment.connectMins).subscribe(
       () => {
-        this.getOnceTodayQuakes(false);
+        this.getOnceTodayQuakes(false, true);
       }
     );
   }
@@ -67,7 +67,7 @@ export class Live2dPageComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  getOnceTodayQuakes(isLoading: boolean): void {
+  getOnceTodayQuakes(isLoading: boolean, motion: boolean): void {
     const alterStates = (values: QuakeOut[]) => {
       if (!values.length) {
         this.quake = '通信エラー';
@@ -81,7 +81,7 @@ export class Live2dPageComponent implements OnInit, OnDestroy {
       if (values[0].maxScale) {
         this.quake = `${values[0].time} ${values[0].hypocenter} 震度${values[0].maxScale}`;
         let translatedScale = this.translateScale[values[0].maxScale];
-        if (translatedScale != 0) {
+        if (translatedScale != 0 && motion) {
           this.changeMotion(translatedScale);
         }
       } else {
