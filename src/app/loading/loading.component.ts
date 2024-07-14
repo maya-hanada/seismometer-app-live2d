@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-loading',
   templateUrl: './loading.component.html',
-  styleUrls: ['./loading.component.css'],
+  styleUrls: ['./loading.component.scss'],
 })
 export class LoadingComponent implements OnInit {
   public isLoading: BehaviorSubject<boolean> = this.loadingService.isLoading;
